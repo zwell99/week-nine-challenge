@@ -26,7 +26,7 @@ const questions = [
     },
     {
         type: "list",
-        name: "liscense",
+        name: "license",
         message: "Please provide the liscense for your project.",
         choices: [
             "Academic Free License v3.0",
@@ -96,7 +96,43 @@ function writeToFile(fileName, data) {
 }
 
 // TODO: Create a function to initialize app
-function init() {}
+function init() {
+    inquirer.prompt(questions).then((response) => {
+        var readmeBody = `
+            # ${response.title}
+
+            ## Description
+            ${response.description}
+
+            ## Table of Contents
+            - [Installation](#installation)
+            - [Usage](#usage)
+            - [Credits](#credits)
+            - [License](#license)
+
+            ## Installation
+            ${response.installation}
+
+            ## Usage
+            ${response.usage}
+
+            ## Credits
+            GitHub: ${response.githubUserName}
+            Email: ${response.email}
+
+            ## License
+            ${response.license}
+
+            ## How to Contribute
+            ${contributing}
+
+            ## Tests
+            ${tests}
+        `
+        writeToFile("README.md", readmeBody);
+    }
+    );
+}
 
 // Function call to initialize app
 init();
