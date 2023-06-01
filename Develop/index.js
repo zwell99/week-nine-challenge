@@ -91,44 +91,42 @@ const questions = [
 // TODO: Create a function to write README file
 function writeToFile(fileName, data) {
     fs.writeFile(fileName, data, (err) =>
-      err ? console.error(err) : console.log('Success!')
+      err ? console.error(err) : console.log('README successfully created!')
     );
 }
 
 // TODO: Create a function to initialize app
 function init() {
     inquirer.prompt(questions).then((response) => {
-        var readmeBody = `
-            # ${response.title}
+        var readmeBody = `# ${response.title}
 
-            ## Description
-            ${response.description}
+## Description
+${response.description}
 
-            ## Table of Contents
-            - [Installation](#installation)
-            - [Usage](#usage)
-            - [Credits](#credits)
-            - [License](#license)
+## Table of Contents
+- [Installation](#installation)
+- [Usage](#usage)
+- [Credits](#credits)
+- [License](#license)
 
-            ## Installation
-            ${response.installation}
+## Installation
+${response.installation}
 
-            ## Usage
-            ${response.usage}
+## Usage
+${response.usage}
 
-            ## Credits
-            GitHub: ${response.githubUserName}
-            Email: ${response.email}
+## Credits
+GitHub: ${response.githubUserName}
+Email: ${response.email}
 
-            ## License
-            ${response.license}
+## License
+${response.license}
 
-            ## How to Contribute
-            ${contributing}
+## How to Contribute
+${response.contributing}
 
-            ## Tests
-            ${tests}
-        `
+## Tests
+${response.tests}`
         writeToFile("README.md", readmeBody);
     }
     );
